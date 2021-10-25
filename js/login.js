@@ -74,7 +74,7 @@ function init() {
       if (flag) {
         showtip('登录成功')
         window.localStorage.setItem('username', name)
-        location.href = './gamelunch.html'
+        location.href = './start.html'
       } else {
         showtip('账号或密码错误')
       }

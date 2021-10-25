@@ -645,7 +645,12 @@ class PlaneGame {
     globalammoImg = this.ammoImg
     // 开局初始化
     const localStatisticalData = window.localStorage.getItem('statisticalData')
-    if (localStatisticalData === '') {
+    if (
+      localStatisticalData === '' ||
+      !localStatisticalData ||
+      localStatisticalData === null ||
+      localStatisticalData === 'null'
+    ) {
       this.statisticalData = []
     } else {
       this.statisticalData = JSON.parse(localStatisticalData)

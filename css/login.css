@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  cursor: url(../img/cusor.ico), auto;
 }
 
 @media screen and (min-width: 500px) {

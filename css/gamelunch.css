@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  cursor: url(../img/cusor.ico), auto;
 }
 body {
   width: 100vw;
@@ -89,7 +90,7 @@ body {
 .health::before {
   display: block;
   position: absolute;
-  left: -25%;
+  left: -50px;
   top: 50%;
   transform: translate(0, -50%);
   font-weight: bold;
@@ -175,9 +176,16 @@ body {
   0%,
   100% {
     opacity: 1;
+    transform: translate(0, 0);
   }
+  70%,
+  30% {
+    transform: translate(2%, 0);
+  }
+
   50% {
     filter: blur(5px);
+    transform: translate(-2%, 0);
     opacity: 0.9;
     border-radius: 50%;
     box-shadow: 0 0 60px 16px red, inset 0 0 40px 56px rgb(221, 130, 26);
