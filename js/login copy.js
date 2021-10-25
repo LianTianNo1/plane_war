@@ -30,10 +30,6 @@ function init() {
   const formboxs = document.querySelectorAll('.formbox')
   const sublogin = document.querySelector('.sublogin')
   const subregister = document.querySelector('.subregister')
-  const boxswrap = document.querySelector('.boxswrap')
-  const external = document.querySelector('.external')
-  const father_box = document.querySelector('.father_box')
-  const option = document.querySelector('.option')
   toRegister.addEventListener('click', function (e) {
     e.stopPropagation()
     e.defaultPrevented
@@ -54,6 +50,7 @@ function init() {
     formboxs[0].className = 'formbox form_show'
     formboxs[1].className = 'formbox'
     document.body.style.backgroundImage = `linear-gradient(145deg, #6599ff, #b9c2c8)`
+
     return
   })
   // 登录验证
@@ -77,12 +74,7 @@ function init() {
       if (flag) {
         showtip('登录成功')
         window.localStorage.setItem('username', name)
-        // external.style.display = 'none'
-        // boxswrap.style.display = 'flex'
-        option.style.display = 'flex'
-        father_box.style.top = '-100vh'
-
-        // location.href = './start.html'
+        location.href = './start.html'
       } else {
         showtip('账号或密码错误')
       }

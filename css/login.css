@@ -3,6 +3,17 @@
   padding: 0;
   cursor: url(../img/cusor.ico), auto;
 }
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill,
+input:-internal-autofill-selected {
+  color: white !important;
+  background-color: transparent !important;
+}
+input:-webkit-autofill  {
+  box-shadow: 0 0 0 1000px #464646 inset !important;
+  caret-color: #fff;
+}
 
 @media screen and (min-width: 500px) {
   html {
@@ -46,6 +57,14 @@ body {
   height: 100vh;
   background-image: linear-gradient(145deg, #6599ff, #b9c2c8);
   transition: background 0.3s;
+  overflow: hidden;
+}
+.father_box {
+  position: absolute;
+  width: 100vw;
+  height: 200vh;
+  top: 0;
+  transition: top 1s cubic-bezier(0.42, 0, 0, 1.04);
 }
 .external {
   position: absolute;

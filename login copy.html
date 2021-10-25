@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>飞机小战登录/注册</title>
+    <link rel="stylesheet" href="./css/login.css" />
+  </head>
+  <body>
+    <ul class="bg-bubbles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <canvas id="canvas" width="1920" height="1080"></canvas>
+    <!-- <div class="infotip">请输入用户名</div> -->
+    <div class="external">
+      <div class="box_swarp">
+        <div id="box">
+          <div class="login">
+            <div class="tip">
+              <h1 class="tip_title tip_title_show">Login</h1>
+              <p class="tip_detail">飞机小站网站的登录页面</p>
+              <p class="tip_detail">
+                欢迎来到小浪的飞机小站网站，这是小浪HTML5的期末考核的作业，做的不好的地方请大家多多指教
+              </p>
+            </div>
+            <div class="formbox">
+              <form action="#">
+                <label for="username" class="heng">用户名:</label>
+                <input type="text" name="username" id="username" />
+                <label for="password" class="heng">密码:</label>
+                <input type="password" name="password" id="password" />
+                <div class="btngroup">
+                  <div class="toregister">去注册</div>
+                  <div class="sublogin">登录</div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="register">
+            <div class="tip">
+              <h1 class="tip_title">register</h1>
+              <p class="tip_detail">飞机小站网站的注册页面</p>
+              <p class="tip_detail">
+                欢迎来到小浪的飞机小站网站，如需使用先进行登录注册
+              </p>
+            </div>
+            <div class="formbox">
+              <form action="#">
+                <label for="rusername" class="heng">用户名:</label>
+                <input
+                  required
+                  type="text"
+                  placeholder="请输入用户名"
+                  name="rusername"
+                  id="rusername"
+                />
+                <label for="rpassword" class="heng">密码:</label>
+                <input
+                  required
+                  type="password"
+                  placeholder="请输入密码"
+                  name="rpassword"
+                  id="rpassword"
+                />
+                <label for="repassword" class="heng">确认密码:</label>
+                <input
+                  required
+                  type="password"
+                  placeholder="确认密码"
+                  name="repassword"
+                  id="repassword"
+                />
+                <label>性别:</label>
+                <div class="sexgroup">
+                  男
+                  <input type="radio" checked value="男" name="sex" id="male" />
+                  女
+                  <input type="radio" value="女" name="sex" id="female" />
+                </div>
+
+                <label required for="bdate">出生日期:</label>
+                <input type="date" name="date" id="bdate" />
+                <label>个人兴趣:</label>
+                <input type="checkbox" name="" value="music" />music
+                <input type="checkbox" name="" value="codeing" />codeing
+                <input type="checkbox" name="" value="eat" />eat
+                <label for="email" class="heng">个人邮箱：</label>
+                <input type="email" name="" id="email" />
+                <label for="detail">个人简介:</label>
+                <textarea cols="90" rows="45" id="detail"></textarea>
+                <div class="btngroup">
+                  <div class="tologin">去登录</div>
+                  <div class="subregister">注册</div>
+                  <input type="reset" value="重置" />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/login.js"></script>
+  </body>
+</html>
