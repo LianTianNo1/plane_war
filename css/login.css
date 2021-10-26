@@ -249,7 +249,14 @@ form label.heng::after {
   height: 0.3rem;
   border-radius: 10px 10px 0 0;
   border-bottom: 2px solid white;
-  background-image: linear-gradient(to right, #36f1cd, #fc8c30, #36f1cd);
+  background-image: linear-gradient(
+    to right,
+    #ff3b1d,
+    #1ec0ff,
+    #aec5eb,
+    #00a0ff,
+    #ff3b1d
+  );
   background-position: 50% 50%;
   background-size: 400% 400%;
   animation: bgmove 15s infinite;

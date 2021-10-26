@@ -590,7 +590,14 @@ class PlaneGame {
   gameoverDom = null
   // 每次对战的数据
   statisticalData
+  // 加载页面
+  loadingDom = null
+  // 倒计时图片
+  loadingImg = null
+  // 游戏选项
+  gameover_ops = null
   // 食物图片
+
   foodImg = [
     './img/my1.png',
     './img/my11.png',
@@ -616,6 +623,10 @@ class PlaneGame {
   ]
   // 构造
   constructor() {
+    this.initData()
+  }
+  // 初始化数据
+  initData() {
     this.enemyPlanes = document.getElementsByClassName('enemyplane')
     this.myAmmo = document.getElementsByClassName('mypd_animate')
     this.foods = document.getElementsByClassName('food')
@@ -623,11 +634,14 @@ class PlaneGame {
     this.bossAmmo = document.getElementsByClassName('dot')
     this.scoreDom = document.querySelector('.score')
     this.gameoverDom = document.querySelector('.game_over')
-    // log(this.foods)
-    this.initGame()
+    this.loadingDom = document.querySelector('.loading')
+    this.loadingImg = document.querySelector('.loading_img')
+    this.gameover_ops = document.querySelectorAll('.option_div')
   }
   // 初始化游戏
   initGame() {
+    // 重新加载图片
+    this.loadingImg.src = './img/loading.gif'
     // 音乐
     this.music = new Music()
     // 我方飞机
@@ -659,19 +673,23 @@ class PlaneGame {
       'statisticalData',
       JSON.stringify(this.statisticalData)
     )
+    // 回到登录页
+    this.gameover_ops[0].onclick = () => {
+      this.savaData()
+
+      location.href = './login.html'
+      window.localStorage.setItem('username', '')
+    }
     // 结束后保存数据
-    this.gameoverDom.onclick = () => {
-      this.statisticalData.push({
-        username: username,
-        Date: new Date(),
-        Hp: this.myplane.myHealth,
-        Score: score,
-      })
-      window.localStorage.setItem(
-        'statisticalData',
-        JSON.stringify(this.statisticalData)
-      )
+    this.gameover_ops[1].onclick = () => {
+      this.savaData()
       location.reload()
+    }
+
+    // 统计数据
+    this.gameover_ops[2].onclick = () => {
+      this.savaData()
+      return alert('还没实现')
     }
   }
   // 游戏结束
@@ -679,7 +697,7 @@ class PlaneGame {
     if (this.myplane.myHealth < 0 || this.myplane.myHealth === 0) {
       this.myplaneSon.src = './img/bbb.gif'
       css(this.gameoverDom, {
-        display: 'block',
+        display: 'flex',
       })
       clearInterval(this.timer)
       this.timer = null
@@ -703,10 +721,34 @@ class PlaneGame {
       }, 1000)
     }
   }
+  // 保存数据
+  savaData() {
+    this.statisticalData.push({
+      username: username,
+      Date: new Date(),
+      Hp: this.myplane.myHealth,
+      Score: score,
+    })
+    window.localStorage.setItem(
+      'statisticalData',
+      JSON.stringify(this.statisticalData)
+    )
+  }
+  // 游戏开始提示
+  loadingGame() {
+    setTimeout(() => {
+      css(this.loadingDom, { display: 'none' })
+      this.loadingImg.src = ''
+
+      // 开始游戏
+      this.initGame()
+
+      this.startTimer()
+    }, 1700)
+  }
   // 游戏的全局定时器
   startTimer() {
     // 子弹吃食物
-    // const myplaneSon = this.myplane.myPlane.children[0]
     let nowTime = null
 
     this.timer = setInterval(() => {
@@ -928,7 +970,8 @@ class PlaneGame {
 }
 window.onload = () => {
   const startGame = new PlaneGame()
-  startGame.startTimer()
+  // startGame.startTimer()
+  startGame.loadingGame()
 }
 // window.onresize = () => {
 //   const startGame = new PlaneGame()
