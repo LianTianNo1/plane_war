@@ -54,6 +54,7 @@ input:-webkit-autofill  {
 }
 
 body {
+  width: 100vw;
   height: 100vh;
   background-image: linear-gradient(145deg, #6599ff, #b9c2c8);
   transition: background 0.3s;
@@ -64,6 +65,8 @@ body {
   width: 100vw;
   height: 200vh;
   top: 0;
+  overflow: hidden;
+
   transition: top 1s cubic-bezier(0.42, 0, 0, 1.04);
 }
 .external {

@@ -288,3 +288,7 @@ body {
   background-color: #1c2d4a;
   z-index: 100;
 }
+.loading > img {
+  width: 100%;
+  /* height: 100%; */
+}

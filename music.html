@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>游戏音乐</title>
+    <link rel="stylesheet" href="./css/music.css" />
+    <link
+      rel="stylesheet"
+      href="//at.alicdn.com/t/font_2893507_kfywnh2ple.css"
+    />
+  </head>
+  <body>
+    <video
+      id="bg_video"
+      src="./video/video1.mp4"
+      poster="./img/video1.jpg"
+    ></video>
+
+    <div class="box">
+      <ul class="video_list">
+        <li class="item active">
+          <video src="./video/video1.mp4" poster="./img/video1.jpg"></video>
+        </li>
+        <li class="item">
+          <video src="./video/video2.mp4" poster="./img/video2.jpg"></video>
+        </li>
+        <li class="item">
+          <video src="./video/video3.mp4" poster="./img/video3.jpg"></video>
+        </li>
+        <li class="item">
+          <video src="./video/video4.mp4" poster="./img/video4.jpg"></video>
+        </li>
+        <li class="item">
+          <video src="./video/video5.mp4" poster="./img/video5.jpg"></video>
+        </li>
+      </ul>
+      <div class="control_center">
+        <div id="Fast_back" class="iconfont icon-speedtui"></div>
+        <div id="preMe" class="iconfont icon-skipprevious"></div>
+        <div id="playMe" class="iconfont icon-bofang"></div>
+        <div id="nexMe" class="iconfont icon-skipnext"></div>
+        <div id="Fast_forward" class="iconfont icon-speedkuaijin"></div>
+        <div id="volumeLow" class="iconfont icon-24gf-volumeLow"></div>
+        <div id="volumeHigh" class="iconfont icon-24gf-volumeHigh"></div>
+      </div>
+    </div>
+    <script src="./js/music.js"></script>
+  </body>
+</html>
