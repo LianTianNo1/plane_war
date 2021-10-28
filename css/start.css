@@ -285,6 +285,7 @@
 
 .time_show,
 .logout {
+  z-index: 99;
   position: absolute;
   top: 2rem;
   right: 2rem;
@@ -293,7 +294,13 @@
   padding: 0.2rem 0.5rem;
   border-radius: 1rem;
   text-shadow: 1px 1px 0px #ff7473, -1px -1px 0px #3a9ad9;
+  transition: all 0.5s;
 }
+.time_show:hover,
+.logout:hover {
+  transform: translate(0, -50%) scale(1.1);
+}
+
 .time_show::before,
 .logout::before {
   position: absolute;
@@ -311,6 +318,7 @@
   line-height: 1rem;
   background-color: rgba(255, 255, 255, 0.377);
   z-index: -1;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
   /* clip-path: circle(1rem at 70%, 50%); */
 }
 .logout {
