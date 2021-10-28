@@ -15,7 +15,10 @@ class MusicShow {
   videoDom
   bgVideoDom
   skipTime = 10
-  volumeSpeed = 10
+  volumeSpeed = 0.1
+  nowVolume
+  volumShow
+  volumShowLen
   constructor() {
     this.initData()
     this.domControl()
@@ -65,6 +68,9 @@ class MusicShow {
     })
     this.videoDom = document.querySelector('li.active video')
     this.bgVideoDom = document.getElementById('bg_video')
+    this.bgVideoDom.volume = 0
+    this.volumShow = document.querySelector('.volum_show')
+    this.volumShowLen = parseInt(getComputedStyle(this.volumShow).width)
   }
 
   // 下一曲
@@ -152,17 +158,24 @@ class MusicShow {
         ? (this.bgVideoDom.currentTime += this.skipTime)
         : this.bgVideoDom.duration
     }
-    // 音量+
-    this.controlDoms[5].onclick = () => {
-      this.videoDom.volume !== 1
-        ? (this.videoDoment.volume += this.volumeSpeed)
-        : 1
-    }
     // 音量-
+    this.controlDoms[5].onclick = () => {
+      this.nowVolume = this.videoDom.volume
+
+      this.videoDom.volume =
+        this.videoDom.volume - this.volumeSpeed <= 0
+          ? 0
+          : Math.abs(this.videoDom.volume * 10 - 1) / 10
+      this.volumShow.style.width = this.nowVolume * this.volumShowLen + 'px'
+    }
+    // 音量+
     this.controlDoms[6].onclick = () => {
-      this.videoDom.volume !== 0
-        ? (this.videoDom.volume -= this.volumeSpeed)
-        : 1
+      this.nowVolume = this.videoDom.volume
+      this.videoDom.volume =
+        this.videoDom.volume + this.volumeSpeed >= 1
+          ? 1
+          : (this.videoDom.volume * 10 + 1) / 10
+      this.volumShow.style.width = this.nowVolume * this.volumShowLen + 'px'
     }
   }
   setCss() {
@@ -170,6 +183,8 @@ class MusicShow {
     this.bgVideoDom.src = this.videoDom.src
     this.bgVideoDom.setAttribute('poster', this.videoDom.getAttribute('poster'))
     this.bgVideoDom.currentTime = '3'
+    this.nowVolume = this.videoDom.volume
+    this.volumShow.style.width = this.nowVolume * this.volumShowLen + 'px'
 
     setTimeout(() => {
       css(this.liDom[this.nowIndex], {

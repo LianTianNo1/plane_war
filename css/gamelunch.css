@@ -3,6 +3,18 @@
   padding: 0;
   cursor: url(../img/cusor.ico), auto;
 }
+@media screen and (min-width: 940px) {
+  .loading > img {
+    width: 50% !important;
+  }
+  .boss {
+    width: 20% !important;
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 940px) {
+}
+@media screen and (min-width: 300px) and (max-width: 500px) {
+}
 body {
   width: 100vw;
   height: 100vh;

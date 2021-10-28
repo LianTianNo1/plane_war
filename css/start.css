@@ -11,13 +11,27 @@
   height: 100vh;
   background: rgb(180, 223, 243);
 } */
+@media screen and (min-width: 300px) and (max-width: 500px) {
+  .box {
+    grid-row-gap: 7rem !important;
+  }
+  .option {
+    flex-wrap: wrap !important;
+  }
+  .option > div {
+    width: 18rem !important;
+    height: 16rem !important;
+    border-radius: 8px !important;
+  }
+}
 @media screen and (min-width: 500px) and (max-width: 1920px) {
   .box {
     grid-template-columns: repeat(7, 2rem);
     grid-template-rows: repeat(7, 2rem);
-    grid-gap: 5rem;
+    grid-gap: 2rem;
   }
 }
+
 .boxswrap {
   /* display: none; */
   position: absolute;
@@ -248,6 +262,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   height: 40%;
   background-color: #fafafa;
   color: #fafafa;
@@ -257,4 +272,47 @@
 .option > div:hover .bottom {
   background-color: #3a405a;
   text-shadow: 2px 2px 1px #ff7473, -2px -2px 1px #3a9ad9;
+  animation: bottom_move 0.7s alternate infinite;
+}
+@keyframes bottom_move {
+  from {
+    letter-spacing: 1px;
+  }
+  to {
+    letter-spacing: 8px;
+  }
+}
+
+.time_show,
+.logout {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  color: #dedcee;
+  background-color: #fff;
+  padding: 0.2rem 0.5rem;
+  border-radius: 1rem;
+  text-shadow: 1px 1px 0px #ff7473, -1px -1px 0px #3a9ad9;
+}
+.time_show::before,
+.logout::before {
+  position: absolute;
+  content: '';
+  padding-left: 0.2rem;
+  display: flex;
+  align-items: center;
+  /* filter: blur(2px); */
+  top: -0.5rem;
+  bottom: -0.5rem;
+  left: -1.5rem;
+  right: -1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1rem;
+  background-color: rgba(255, 255, 255, 0.377);
+  z-index: -1;
+  /* clip-path: circle(1rem at 70%, 50%); */
+}
+.logout {
+  top: 6rem;
 }

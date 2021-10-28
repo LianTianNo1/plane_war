@@ -25,11 +25,14 @@ function followCursor(e) {
 }
 function init() {
   // 设置默认账号
+  let userInfo = window.localStorage.getItem('userInfo')
+  if (!userInfo || userInfo.length == 0) {
+    window.localStorage.setItem(
+      'userInfo',
+      JSON.stringify([{ username: 'html5kc', password: '123456' }])
+    )
+  }
 
-  window.localStorage.setItem(
-    'userInfo',
-    JSON.stringify([{ username: 'html5kc', password: '123456' }])
-  )
   // 颜色池
   colorList = [
     '#96ceb4',
