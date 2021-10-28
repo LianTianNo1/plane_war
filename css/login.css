@@ -255,15 +255,42 @@ form {
   color: white;
   padding: 2rem 2rem 4rem;
   box-sizing: border-box;
+  /* transition: all 1s; */
   /* border-radius: 57% 43% 37% 63%/45% 52% 48% 55%; */
-  border-radius: 25% 75% 47% 53% / 54% 30% 70% 46%;
+  /* border-radius: 25% 75% 47% 53% / 54% 30% 70% 46%; */
   box-shadow: inset 10px 10px 10px rgba(0, 0, 0, 0.05),
     15px 25px 10px rgba(0, 0, 0, 0.1), 15px 20px 20px rgba(0, 0, 0, 0.05),
     inset -10px -10px 15px rgba(255, 255, 255, 0.9);
 }
+@keyframes form_animate {
+  0%,
+  100% {
+    border-radius: 71% 29% 48% 52% / 34% 35% 65% 66%;
+  }
+  20%,
+  80% {
+    border-radius: 33% 67% 65% 35% / 59% 58% 42% 41%;
+  }
+  30%,
+  70% {
+    border-radius: 12% 88% 25% 75% / 59% 58% 42% 41%;
+  }
+  40%,
+  60% {
+    border-radius: 68% 32% 65% 35% / 51% 73% 27% 49%;
+  }
+  50% {
+    border-radius: 59% 41% 81% 19% / 34% 80% 20% 66%;
+  }
+}
+form:hover,
+.btngroup:hover::before {
+  animation: form_animate 1.5s ease-out alternate infinite;
+}
 .form_show {
   animation: form_show cubic-bezier(0.26, 0.78, 0.4, 1.4) 0.5s 0.3s forwards;
 }
+
 @keyframes form_show {
   50% {
     transform: translate(-50%, 0);
@@ -381,6 +408,7 @@ input[type='checkbox'] {
   padding: 0.8rem 0;
 }
 .btngroup::before {
+  animation-delay: 0.4s;
   position: absolute;
   content: '';
   display: block;
@@ -428,11 +456,11 @@ input[type='reset']:hover {
 }
 /*修改滚动条样式*/
 form::-webkit-scrollbar {
-  width: 10px;
+  width: 4px;
   height: 10px;
 }
 form::-webkit-scrollbar-track {
-  background: rgb(239, 239, 239);
+  background: rgb(239 239 239 / 52%);
   border-radius: 2px;
 }
 form::-webkit-scrollbar-thumb {

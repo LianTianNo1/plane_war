@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+  cursor: url(../img/cusor.ico), auto;
+}
+@media screen and (min-width: 500px) {
+}
+@media screen and (min-width: 300px) and (max-width: 500px) {
+}
+html {
+  font-size: 24px;
+}
+body {
+  position: relative;
+  height: 100vh;
+  background: rgb(180, 223, 243);
+  overflow: hidden;
+}
+.boxswrap {
+  top: 0%;
+}
+.option {
+  display: flex;
+}

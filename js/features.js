@@ -1,36 +1,36 @@
-let items = document.querySelectorAll('.item')
-items.nowTime = 0
-// const { log } = console
+const time_show = document.querySelector('.time_show')
 const startGame = document.querySelector('.startGame')
 const backLogin = document.querySelector('.backLogin')
-const father_box = document.querySelector('.father_box')
 const game_BGM = document.querySelector('.gameBGM')
-const option = document.querySelector('.option')
-const time_show = document.querySelector('.time_show')
-// const logout = document.querySelector('.logout')
-// document.body.onmousemove = followCursor
+const logout = document.querySelector('.logout')
+// const back_home_page = document.querySelector('.back_home_page')
 
 startGame.onclick = () => {
-  location.href = './features.html'
+  location.href = './gamelunch.html'
 }
-backLogin.onclick = () => {
-  // location.href = './login.html'
-  father_box.style.top = '0vh'
-  option.style.display = 'none'
-  showtip('登出成功')
-  document.body.onmousemove = null
-  externalbox.style.display = 'flex'
-  canvas.style.display = 'block'
-  bg_bubbles.style.display = 'block'
+// back_home_page.onclick = () => {
+//   location.href = './login.html'
 
+//   setTimeout(() => {
+//     option.style.display = 'flex'
+//     father_box.style.top = '-100vh'
+//     // document.body.onmousemove = followCursor
+//     externalbox.style.display = 'none'
+//     canvas.style.display = 'none'
+//     bg_bubbles.style.display = 'none'
+//   }, 1000)
+// }
+logout.onclick = () => {
+  location.href = './login.html'
   window.localStorage.setItem('username', '')
 }
 
 game_BGM.onclick = () => {
-  // alert('还没实现')
-  location.href = './themeIntroduced.html'
+  location.href = './music.html'
 }
-
+backLogin.onclick = () => {
+  location.href = './statistical.html'
+}
 // 格式化时间
 function dateFormat(fmt, date) {
   let ret

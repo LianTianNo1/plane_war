@@ -28,7 +28,11 @@ body {
     filter: blur(9px);
     opacity: 0.5;
     border-radius: 50%;
-    box-shadow: 0 0 40px 16px red, inset 0 0 40px 56px rgb(221, 130, 26);
+    /* box-shadow: 0 0 40px 16px red, inset 0 0 40px 56px rgb(221, 130, 26); */
+    filter: drop-shadow(0 -4px 7px red) drop-shadow(0 4px 7px red)
+      drop-shadow(0 -13px 20px rgb(221, 130, 26))
+      drop-shadow(0 -13px 20px rgb(221, 130, 26));
+    /* box-shadow: 0 0 40px 16px red, inset 0 0 40px 56px rgb(221, 130, 26); */
   }
   from,
   to {
@@ -279,7 +283,10 @@ body {
     transform: translate(-2%, 0);
     opacity: 0.9;
     border-radius: 50%;
-    box-shadow: 0 0 60px 16px red, inset 0 0 40px 56px rgb(221, 130, 26);
+    filter: drop-shadow(0 -4px 7px red) drop-shadow(0 4px 7px red)
+      drop-shadow(0 -13px 20px rgb(221, 130, 26))
+      drop-shadow(0 -13px 20px rgb(221, 130, 26));
+    /* box-shadow: 0 0 60px 16px red, inset 0 0 40px 56px rgb(221, 130, 26); */
   }
 }
 .dot {
