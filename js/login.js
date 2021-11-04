@@ -3,6 +3,7 @@ let colorList
 const externalbox = document.querySelector('.external')
 const canvas = document.getElementById('canvas')
 const bg_bubbles = document.querySelector('.bg-bubbles')
+const box2 = document.querySelector('.box')
 
 function followCursor(e) {
   if (new Date() - items.nowTime > 250) {
@@ -111,7 +112,8 @@ function init() {
           externalbox.style.display = 'none'
           canvas.style.display = 'none'
           bg_bubbles.style.display = 'none'
-        }, 1000)
+          box2.style.display = 'grid'
+        }, 1200)
 
         // location.href = './start.html'
       } else {

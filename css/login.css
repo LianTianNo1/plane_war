@@ -285,7 +285,7 @@ form {
 }
 form:hover,
 .btngroup:hover::before {
-  animation: form_animate 1.5s ease-out alternate infinite;
+  animation: form_animate 10.5s ease-out alternate infinite;
 }
 .form_show {
   animation: form_show cubic-bezier(0.26, 0.78, 0.4, 1.4) 0.5s 0.3s forwards;

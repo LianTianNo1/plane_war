@@ -50,6 +50,35 @@ body {
   top: 92%;
   left: 50%;
 }
+.myplane::after,
+.myplane::before {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 100%;
+  left: 35%;
+  background-image: linear-gradient(
+    to bottom,
+    rgb(0, 225, 255) 10%,
+    transparent 80%
+  );
+  width: 15%;
+  top: 6vh;
+  z-index: -1;
+  filter: blur(8px);
+  border-radius: 30% 70% 47% 53% / 0% 0% 100% 100%;
+  transform: translate(-50%, 0%);
+  animation: myplane_an 1s alternate infinite;
+}
+@keyframes myplane_an {
+  to {
+    top: 7vh;
+    filter: blur(4px);
+  }
+}
+.myplane::before {
+  left: 65%;
+}
 .mypd_animate {
   position: absolute;
   top: 100%;
