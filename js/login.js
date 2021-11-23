@@ -4,6 +4,45 @@ const externalbox = document.querySelector('.external')
 const canvas = document.getElementById('canvas')
 const bg_bubbles = document.querySelector('.bg-bubbles')
 const box2 = document.querySelector('.box')
+const block_box = document.querySelector('.block_box')
+const rd = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
+const colorPool = ['#22181C', '#FF5B00', 'white']
+const css = (ele, json) => {
+  for (let key in json) ele.style[key] = json[key]
+}
+// 创建背景
+function crateBlock(num = 40) {
+  block_box.innerHTML = ''
+  for (let i = 0; i < num; i++) {
+    const mydiv = document.createElement('div')
+    mydiv.className = 'blockdiv'
+    const wh = rd(1, 20)
+    css(mydiv, {
+      left: rd(-20, 100) + '%',
+      top: rd(-20, 100) + '%',
+      width: wh + 'vw',
+      height: wh + 'vw',
+      backgroundColor: colorPool[rd(0, colorPool.length - 1)],
+    })
+    block_box.appendChild(mydiv)
+  }
+}
+// 移动位置
+const blocks = document.getElementsByClassName('blockdiv')
+function moveBlock() {
+  ;[...blocks].forEach((item) => {
+    const wh = rd(1, 20)
+
+    css(item, {
+      left: rd(0, 100) + '%',
+      top: rd(0, 100) + '%',
+      width: wh + 'vw',
+      height: wh + 'vw',
+      transitionTimingFunction: `cubic-bezier(${Math.random()}, ${Math.random()}, ${Math.random()}, 1)`,
+      backgroundColor: colorPool[rd(0, colorPool.length - 1)],
+    })
+  })
+}
 
 function followCursor(e) {
   if (new Date() - items.nowTime > 250) {
@@ -185,4 +224,8 @@ function showtip(msg) {
 
 window.onload = () => {
   init()
+  crateBlock(100)
+  setInterval(() => {
+    moveBlock()
+  }, 4000)
 }
