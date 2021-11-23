@@ -103,8 +103,6 @@ function init() {
       if (flag) {
         showtip('登录成功')
         window.localStorage.setItem('username', name)
-        // external.style.display = 'none'
-        // boxswrap.style.display = 'flex'
         option.style.display = 'flex'
         father_box.style.top = '-100vh'
         document.body.onmousemove = followCursor
@@ -114,8 +112,12 @@ function init() {
           bg_bubbles.style.display = 'none'
           box2.style.display = 'grid'
         }, 1200)
-
-        // location.href = './start.html'
+        const username = window.localStorage.getItem('username')
+        if (!username || username.length == 0) {
+          location.href = './login.html'
+        } else {
+          hellow_user.innerText = `您好：${username} !!!`
+        }
       } else {
         showtip('账号或密码错误')
       }

@@ -23,6 +23,19 @@
     height: 16rem !important;
     border-radius: 8px !important;
   }
+  .option {
+    top: 58% !important;
+    transform: translate(-50%, -50%) scale(0.8) !important;
+  }
+  .hellow_user {
+    right: 2rem;
+  }
+  .time_show,
+  .logout,
+  .back_home_page {
+    top: 6rem !important;
+    left: 2rem;
+  }
 }
 @media screen and (min-width: 500px) and (max-width: 1920px) {
   .box {

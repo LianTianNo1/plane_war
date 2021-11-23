@@ -3,6 +3,13 @@
   padding: 0;
   cursor: url(../img/cusor.ico), auto;
 }
+@font-face {
+  font-family: my_font;
+  src: url('../font/字魂27号-布丁体.ttf');
+}
+* {
+  font-family: my_font !important;
+}
 @media screen and (min-width: 500px) {
   html {
     font-size: 24px;

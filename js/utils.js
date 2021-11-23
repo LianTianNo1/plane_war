@@ -23,9 +23,3 @@ function dateFormat(fmt, date) {
 }
 
 const hellow_user = document.querySelector('.hellow_user')
-const username = window.localStorage.getItem('username')
-if (!username || username.length == 0) {
-  location.href = './login.html'
-} else {
-  hellow_user.innerText = `您好：${username} !!!`
-}

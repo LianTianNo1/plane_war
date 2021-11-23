@@ -1,7 +1,12 @@
 const liDoms = [...document.querySelectorAll('.list li')]
 const infoList = [...document.querySelectorAll('.showinfo')]
 const time_show = document.querySelector('.time_show')
-
+const username = window.localStorage.getItem('username')
+if (!username || username.length == 0) {
+  location.href = './login.html'
+} else {
+  hellow_user.innerText = `您好：${username} !!!`
+}
 const { log } = console
 
 for (let i = 0; i < liDoms.length; i++) {

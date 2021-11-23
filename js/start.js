@@ -1,5 +1,6 @@
 let items = document.querySelectorAll('.item')
 items.nowTime = 0
+
 // const { log } = console
 const startGame = document.querySelector('.startGame')
 const backLogin = document.querySelector('.backLogin')

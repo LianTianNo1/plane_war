@@ -1,8 +1,15 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: my_font !important;
+
   cursor: url(../img/cusor.ico), auto;
 }
+@font-face {
+  font-family: my_font;
+  src: url('../font/字魂27号-布丁体.ttf');
+}
+
 input:-webkit-autofill,
 textarea:-webkit-autofill,
 select:-webkit-autofill,
@@ -196,12 +203,13 @@ body {
   box-shadow: 0 0 10px 5px rgb(224, 224, 224);
   border-radius: 8px 0 0 8px;
   margin-left: 2%;
-  transition: height 0.3s;
+  transition: all 0.7s;
   overflow: hidden;
   cursor: pointer;
 }
 .tip:hover {
   height: 15rem;
+  background-color: transparent;
 }
 .tip_title {
   font-size: 2rem;

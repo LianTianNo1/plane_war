@@ -17,8 +17,9 @@
     height: 13rem !important;
   }
   .control_center {
-    top: 60% !important;
+    top: 62% !important;
     flex-wrap: wrap !important;
+    width: 100%;
   }
   .control_center > div {
     font-size: 2rem !important;

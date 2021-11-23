@@ -1,6 +1,16 @@
-@media screen and (min-width: 850px) {
+@font-face {
+  font-family: my_font;
+  src: url('../font/字魂27号-布丁体.ttf');
 }
-@media screen and (min-width: 500px) and (max-width: 850px) {
+* {
+  font-family: my_font !important;
+}
+@media screen and (min-width: 900px) {
+}
+@media screen and (min-width: 500px) and (max-width: 900px) {
+  ul.list > li {
+    padding: 2vh !important;
+  }
 }
 @media screen and (min-width: 300px) and (max-width: 500px) {
   body {
@@ -12,6 +22,23 @@
     top: 5vh !important;
     position: relative;
     padding: 2vh !important;
+  }
+  .hellow_user {
+    right: 2rem !important;
+  }
+  .time_show,
+  .logout,
+  .back_home_page {
+    top: 5rem !important;
+    left: 2rem !important;
+  }
+  ul.list {
+    top: 11vh !important;
+
+    width: 100vw !important;
+  }
+  .showlist {
+    top: 25vh !important;
   }
 }
 * {
@@ -28,29 +55,27 @@ body {
   height: 100vh;
   /* background-image: url(../img//picture4.png); */
   background-image: linear-gradient(to bottom right, #dedcee, #aec5eb);
-  background-size: cover;
-  overflow: hidden;
+  background-size: 100% 200%;
+  overflow-x: hidden;
 }
 ul.list {
-  position: absolute;
+  position: fixed;
   list-style: none;
   top: 2vh;
   left: 50%;
   transform: translate(-50%, 0);
-  width: 85vw;
+  width: 45vw;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
+  z-index: 9999999999999999;
 }
 
 ul.list > li {
   position: relative;
   padding: 4vh;
   color: white;
-  /* border-radius: 25% 75% 47% 53% / 54% 30% 70% 46%;
-  box-shadow: inset 10px 10px 10px rgba(0, 0, 0, 0.05),
-    15px 25px 10px rgba(0, 0, 0, 0.1), 15px 20px 20px rgba(0, 0, 0, 0.05),
-    inset -10px -10px 15px rgba(255, 255, 255, 0.9); */
+  text-shadow: 1px 1px 1px #e36161;
   transition: all 0.8s;
 }
 ul.list > li::before {
@@ -99,6 +124,7 @@ ul.list > li:hover::before {
   position: absolute;
   top: 14vh;
   width: 90vw;
+  /* overflow-y: auto; */
   /* height: 85vh; */
 }
 .showlist > .showinfo {
@@ -172,7 +198,7 @@ li {
 .logout,
 .back_home_page {
   z-index: 99;
-  position: absolute;
+  position: fixed;
   top: 2rem;
   right: 2rem;
   color: #dedcee;
@@ -208,4 +234,52 @@ li {
   z-index: -1;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
   /* clip-path: circle(1rem at 70%, 50%); */
+}
+.hellow_user::after {
+  content: '';
+  position: absolute;
+  display: flex;
+  background-image: url('../img/logo.png');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 10vh;
+  height: 10vh;
+  top: -2vh;
+  left: -4vh;
+}
+
+.hellow_user:hover {
+  transform: translate(0, -50%) scale(1.1);
+}
+.hellow_user::before {
+  position: absolute;
+  content: '';
+  padding-left: 0.2rem;
+  display: flex;
+  align-items: center;
+  /* filter: blur(2px); */
+  top: -0.5rem;
+  bottom: -0.5rem;
+  left: -1.5rem;
+  right: -1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  line-height: 1rem;
+  background-color: rgba(255, 255, 255, 0.377);
+  z-index: -1;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+  /* clip-path: circle(1rem at 70%, 50%); */
+}
+
+.hellow_user {
+  z-index: 99;
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  color: #dedcee;
+  background-color: #fff;
+  padding: 0.2rem 6vh;
+  border-radius: 1rem;
+  text-shadow: 1px 1px 0px #ff7473, -1px -1px 0px #3a9ad9;
+  transition: all 0.5s;
 }

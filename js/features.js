@@ -4,6 +4,12 @@ const backLogin = document.querySelector('.backLogin')
 const game_BGM = document.querySelector('.gameBGM')
 const logout = document.querySelector('.logout')
 // const back_home_page = document.querySelector('.back_home_page')
+const username = window.localStorage.getItem('username')
+if (!username || username.length == 0) {
+  location.href = './login.html'
+} else {
+  hellow_user.innerText = `您好：${username} !!!`
+}
 
 startGame.onclick = () => {
   location.href = './gamelunch.html'
