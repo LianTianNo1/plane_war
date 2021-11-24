@@ -1,12 +1,17 @@
 const { log } = console
 let colorList
 const externalbox = document.querySelector('.external')
-const canvas = document.getElementById('canvas')
-const bg_bubbles = document.querySelector('.bg-bubbles')
+let blockTiemr = null
 const box2 = document.querySelector('.box')
 const block_box = document.querySelector('.block_box')
 const rd = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
-const colorPool = ['#22181C', '#FF5B00', 'white']
+const totalPool = [
+  ['#22181C', '#FF5B00', 'white'],
+  ['#00dffc', '#008c9e', '#005f6b', '#343838'],
+  ['#2C3E50', '#FC6621', '#EDF1F2', '#42B4E7'],
+  ['#F5E5FC', '#8AE1FC', '#C08497', '#48B8D0'],
+]
+let colorPool = totalPool[rd(0, totalPool.length - 1)]
 const css = (ele, json) => {
   for (let key in json) ele.style[key] = json[key]
 }
@@ -16,7 +21,7 @@ function crateBlock(num = 40) {
   for (let i = 0; i < num; i++) {
     const mydiv = document.createElement('div')
     mydiv.className = 'blockdiv'
-    const wh = rd(1, 20)
+    const wh = rd(5, 40)
     css(mydiv, {
       left: rd(-20, 100) + '%',
       top: rd(-20, 100) + '%',
@@ -26,22 +31,25 @@ function crateBlock(num = 40) {
     })
     block_box.appendChild(mydiv)
   }
+  setTimeout(() => {
+    moveBlock()
+  }, 100)
 }
 // 移动位置
 const blocks = document.getElementsByClassName('blockdiv')
 function moveBlock() {
-  ;[...blocks].forEach((item) => {
-    const wh = rd(1, 20)
-
-    css(item, {
-      left: rd(0, 100) + '%',
-      top: rd(0, 100) + '%',
+  let colorPool = totalPool[rd(0, totalPool.length - 1)]
+  for (let i = 0; i < blocks.length; i++) {
+    const wh = rd(5, 40)
+    css(blocks[i], {
+      left: rd(-20, 100) + '%',
+      top: rd(-20, 100) + '%',
       width: wh + 'vw',
       height: wh + 'vw',
       transitionTimingFunction: `cubic-bezier(${Math.random()}, ${Math.random()}, ${Math.random()}, 1)`,
       backgroundColor: colorPool[rd(0, colorPool.length - 1)],
     })
-  })
+  }
 }
 
 function followCursor(e) {
@@ -147,8 +155,10 @@ function init() {
         document.body.onmousemove = followCursor
         setTimeout(() => {
           externalbox.style.display = 'none'
-          canvas.style.display = 'none'
-          bg_bubbles.style.display = 'none'
+          // canvas.style.display = 'none'
+          // bg_bubbles.style.display = 'none'
+          clearInterval(blockTiemr)
+          block_box.style.display = 'none'
           box2.style.display = 'grid'
         }, 1200)
         const username = window.localStorage.getItem('username')
@@ -222,10 +232,13 @@ function showtip(msg) {
   })
 }
 
+function startTimer() {
+  return setInterval(() => {
+    moveBlock()
+  }, 4000)
+}
 window.onload = () => {
   init()
   crateBlock(100)
-  setInterval(() => {
-    moveBlock()
-  }, 4000)
+  blockTiemr = startTimer()
 }

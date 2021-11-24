@@ -230,7 +230,7 @@ body {
 }
 .tip:hover {
   height: 15rem;
-  background-color: transparent;
+  background-color: #ff762b;
 }
 .tip_title {
   font-size: 2rem;
@@ -269,7 +269,7 @@ body {
 }
 .formbox {
   perspective: 2000px;
-  width: 48%;
+  width: 75%;
   margin-right: 2%;
   font-size: 0.6rem;
   /* box-shadow: 0 0 20px rgb(204, 204, 204), inset 0 0 40px 10px #fff; */
@@ -282,9 +282,12 @@ form {
   margin-right: 2%;
   font-size: 0.6rem;
   /* box-shadow: 0 0 20px rgb(204, 204, 204), inset 0 0 40px 10px #fff; */
-  color: white;
+  /* color: white; */
+  color: #a781cc;
   padding: 2rem 2rem 4rem;
   box-sizing: border-box;
+  background: rgb(255, 255, 255);
+
   /* transition: all 1s; */
   /* border-radius: 57% 43% 37% 63%/45% 52% 48% 55%; */
   /* border-radius: 25% 75% 47% 53% / 54% 30% 70% 46%; */
@@ -356,7 +359,7 @@ form label:nth-child(1) {
 }
 form label {
   position: relative;
-  color: #ffffff;
+  color: #ee5602;
   font-size: 0.6rem;
   display: block;
 }
@@ -389,7 +392,7 @@ input[type='email'],
 input[type='date'] {
   outline: none !important;
   border: none;
-  color: white;
+  color: #a165a3;
   letter-spacing: 0.3rem;
   font-size: 0.6rem;
   padding-left: 1rem;
@@ -439,6 +442,8 @@ input[type='checkbox'] {
   padding: 0.8rem 0;
 }
 .btngroup::before {
+  background-color: white;
+
   animation-delay: 0.4s;
   position: absolute;
   content: '';
@@ -542,7 +547,7 @@ form::-webkit-scrollbar-corner {
   }
 }
 
-#canvas {
+/* #canvas {
   position: absolute;
   z-index: 0;
 }
@@ -653,7 +658,7 @@ form::-webkit-scrollbar-corner {
     opacity: 0;
     background-color: rgba(0, 119, 255, 0.3);
   }
-}
+} */
 
 * {
   margin: 0;
