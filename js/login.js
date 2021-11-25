@@ -8,8 +8,8 @@ const rd = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 const totalPool = [
   ['#22181C', '#FF5B00', 'white'],
   ['#00dffc', '#008c9e', '#005f6b', '#343838'],
-  ['#2C3E50', '#FC6621', '#EDF1F2', '#42B4E7'],
-  ['#F5E5FC', '#8AE1FC', '#C08497', '#48B8D0'],
+  // ['#2C3E50', '#FC6621', '#EDF1F2', '#42B4E7'],
+  // ['#F5E5FC', '#8AE1FC', '#C08497', '#48B8D0'],
 ]
 let colorPool = totalPool[rd(0, totalPool.length - 1)]
 const css = (ele, json) => {
@@ -21,14 +21,21 @@ function crateBlock(num = 40) {
   for (let i = 0; i < num; i++) {
     const mydiv = document.createElement('div')
     mydiv.className = 'blockdiv'
-    const wh = rd(5, 40)
+    const wh = rd(5, 30)
     css(mydiv, {
       left: rd(-20, 100) + '%',
       top: rd(-20, 100) + '%',
-      width: wh + 'vw',
-      height: wh + 'vw',
+      width: 10 + 'vw',
+      height: 10 + 'vw',
       backgroundColor: colorPool[rd(0, colorPool.length - 1)],
     })
+    mydiv.innerHTML = `
+    <figure class="front">H</figure>
+    <figure class="back">T</figure>
+    <figure class="right">M</figure>
+    <figure class="left">L</figure>
+    <figure class="top">5</figure>
+    <figure class="bottom">!</figure>`
     block_box.appendChild(mydiv)
   }
   setTimeout(() => {
@@ -37,18 +44,42 @@ function crateBlock(num = 40) {
 }
 // 移动位置
 const blocks = document.getElementsByClassName('blockdiv')
+const figures = document.getElementsByTagName('figure')
 function moveBlock() {
   let colorPool = totalPool[rd(0, totalPool.length - 1)]
-  for (let i = 0; i < blocks.length; i++) {
-    const wh = rd(5, 40)
-    css(blocks[i], {
-      left: rd(-20, 100) + '%',
-      top: rd(-20, 100) + '%',
-      width: wh + 'vw',
-      height: wh + 'vw',
-      transitionTimingFunction: `cubic-bezier(${Math.random()}, ${Math.random()}, ${Math.random()}, 1)`,
-      backgroundColor: colorPool[rd(0, colorPool.length - 1)],
-    })
+  const mode = rd(0, 1)
+  if (mode === 1) {
+    ![...figures].forEach((item) => (item.style.display = 'flex'))
+    for (let i = 0; i < blocks.length; i++) {
+      if (i > 14) blocks[i].style.display = 'none'
+      css(blocks[i], {
+        left: rd(-20, 100) + '%',
+        top: rd(-20, 100) + '%',
+        transform: `rotate3d(1, 1, 1, ${rd(0, 720)}deg) translateZ(${rd(
+          1,
+          40
+        )}vw) `,
+        transitionTimingFunction: `cubic-bezier(${Math.random()}, ${Math.random()}, ${Math.random()}, 1)`,
+        backgroundColor: colorPool[rd(0, colorPool.length - 1)],
+        boxShadow: 'none',
+      })
+    }
+  } else {
+    ![...figures].forEach((item) => (item.style.display = 'none'))
+    for (let i = 0; i < blocks.length; i++) {
+      blocks[i].style.display = 'block'
+      setTimeout(() => {
+        css(blocks[i], {
+          left: rd(-20, 100) + '%',
+          top: rd(-20, 100) + '%',
+          borderRadius: '0',
+          transform: ` translateZ(${rd(1, 40)}vw) `,
+          transitionTimingFunction: `cubic-bezier(${Math.random()}, ${Math.random()}, ${Math.random()}, 1)`,
+          backgroundColor: colorPool[rd(0, colorPool.length - 1)],
+          boxShadow: '18px 20px 20px 6px rgb(0 0 0 / 30%)',
+        })
+      }, 100)
+    }
   }
 }
 
@@ -235,10 +266,11 @@ function showtip(msg) {
 function startTimer() {
   return setInterval(() => {
     moveBlock()
-  }, 4000)
+  }, 8000)
 }
+
 window.onload = () => {
   init()
-  crateBlock(100)
+  crateBlock(60)
   blockTiemr = startTimer()
 }
