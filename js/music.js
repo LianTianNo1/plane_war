@@ -4,7 +4,10 @@ function toogleState() {}
 let css = (ele, json) => {
   for (let key in json) ele.style[key] = json[key]
 }
-
+const username = window.localStorage.getItem('username')
+if (!username || username.length == 0) {
+  location.href = './login.html'
+}
 // 音乐控制类
 class MusicShow {
   nowIndex = 0
