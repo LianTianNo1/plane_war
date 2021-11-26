@@ -10,9 +10,6 @@ const totalPool = [
   ['#00dffc', '#008c9e', '#005f6b', '#343838'],
   // ['#2C3E50', '#FC6621', '#EDF1F2', '#42B4E7'],
   // ['#F5E5FC', '#8AE1FC', '#C08497', '#48B8D0'],
-  ['#a3daff', '#1ec0ff', '#0080ff', '#03a6ff'],
-  ['#FFCAD4', '#B0D0D3', '#C08497', '#F7AF9D'],
-  ['#0A4958', '#01B6AD', '#F6E7D2', '#FFFFFF'],
 ]
 let colorPool = totalPool[rd(0, totalPool.length - 1)]
 const css = (ele, json) => {
@@ -31,6 +28,8 @@ function crateBlock(num = 40) {
       height: 10 + 'vw',
       borderRadius: '0',
       backgroundColor: colorPool[rd(0, colorPool.length - 1)],
+      transition: `all cubic-bezier(0.63, -0.05, 0.65, 2.25) 1s`,
+      boxShadow: '18px 20px 20px 6px rgb(0 0 0 / 30%)',
     })
     block_box.appendChild(mydiv)
   }
@@ -41,53 +40,26 @@ function crateBlock(num = 40) {
 // 移动位置
 const blocks = document.getElementsByClassName('blockdiv')
 let imgIndex = 0
-let randomModeIndex = 1
 function moveBlock() {
   if (imgIndex > totalPool.length - 1) imgIndex = 0
-  if (randomModeIndex > 1) randomModeIndex = 0
   let colorPool = totalPool[imgIndex]
   imgIndex++
-
-  if (randomModeIndex === 0) {
-    for (let i = 0; i < blocks.length; i++) {
-      css(blocks[i], {
-        left: rd(-10, 100) + '%',
-        top: rd(-10, 100) + '%',
-        width: 100 + 'px',
-        height: 100 + 'px',
-        borderRadius: '50%',
-        transform: ` translateZ(${rd(5, 400)}px) `,
-        // filter: 'drop-shadow(0 0 40px white)',
-        border: `8px solid white`,
-        transition: `all cubic-bezier(${Math.random()}, ${Math.random()}, ${Math.random()}, 1) 1s`,
-        backgroundColor: colorPool[rd(0, colorPool.length - 1)],
-        boxShadow: 'none',
-      })
-    }
-  } else if (randomModeIndex === 1) {
-    for (let i = 0; i < blocks.length; i++) {
-      css(blocks[i], {
-        left: rd(-10, 100) + '%',
-        top: rd(-10, 100) + '%',
-        width: rd(20, 200) + 'px',
-        height: rd(20, 200) + 'px',
-        transform: `scale(${rd(0.5, 3)}) `,
-        // filter: 'none',
-        border: `0px solid white`,
-        borderRadius: '0%',
-        transition: `all cubic-bezier(0.63, -0.05, 0.65, 2.25) 1s`,
-        backgroundColor: colorPool[rd(0, colorPool.length - 1)],
-        boxShadow: '18px 20px 20px 6px rgb(0 0 0 / 30%)',
-      })
-    }
+  for (let i = 0; i < blocks.length; i++) {
+    css(blocks[i], {
+      left: rd(-10, 100) + '%',
+      top: rd(-10, 100) + '%',
+      width: rd(5, 10) + 'vw',
+      height: rd(5, 10) + 'vw',
+      transform: `scale(${rd(0.5, 3)}) `,
+      backgroundColor: colorPool[rd(0, colorPool.length - 1)],
+    })
   }
-  randomModeIndex++
 }
 
 function startTimer() {
   return setInterval(() => {
     moveBlock()
-  }, 2500)
+  }, 2000)
 }
 
 function followCursor(e) {
