@@ -554,13 +554,15 @@ form::-webkit-scrollbar-corner {
   perspective: 800px;
 }
 .blockdiv {
-  transition: all ease-in-out 8s;
+  transition: all ease-in-out 5s;
   transform-style: preserve-3d;
   position: absolute;
   transform: translateZ(-100px);
   border-radius: 10%;
 }
 .blockdiv figure {
+  transition: all ease-in-out 5s;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -571,6 +573,7 @@ form::-webkit-scrollbar-corner {
   background: inherit;
   border: 2px solid white;
   color: white;
+  /* filter: drop-shadow(0 0 40px white); */
   text-shadow: 2px 2px 1px #558ad8, -2px -2px 1px #ff5807;
 }
 .blockdiv .front {

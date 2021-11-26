@@ -21,14 +21,14 @@ function crateBlock(num = 40) {
   for (let i = 0; i < num; i++) {
     const mydiv = document.createElement('div')
     mydiv.className = 'blockdiv'
+    // const wh = rd(5, 30)
     css(mydiv, {
       left: rd(-20, 100) + '%',
       top: rd(-20, 100) + '%',
       width: 10 + 'vw',
-      height: 10 + 'vw',
       borderRadius: '0',
+      height: 10 + 'vw',
       backgroundColor: colorPool[rd(0, colorPool.length - 1)],
-      transition: `all cubic-bezier(0.63, -0.05, 0.65, 2.25) 1s`,
       boxShadow: '18px 20px 20px 6px rgb(0 0 0 / 30%)',
     })
     block_box.appendChild(mydiv)
@@ -39,27 +39,18 @@ function crateBlock(num = 40) {
 }
 // 移动位置
 const blocks = document.getElementsByClassName('blockdiv')
-let imgIndex = 0
+
 function moveBlock() {
-  if (imgIndex > totalPool.length - 1) imgIndex = 0
-  let colorPool = totalPool[imgIndex]
-  imgIndex++
+  let colorPool = totalPool[rd(0, totalPool.length - 1)]
   for (let i = 0; i < blocks.length; i++) {
     css(blocks[i], {
       left: rd(-10, 100) + '%',
       top: rd(-10, 100) + '%',
-      width: rd(5, 10) + 'vw',
-      height: rd(5, 10) + 'vw',
-      transform: `scale(${rd(0.5, 3)}) `,
+      transform: ` translateZ(${rd(5, 40)}vw) `,
+      transitionTimingFunction: `cubic-bezier(${Math.random()}, ${Math.random()}, ${Math.random()}, 1)`,
       backgroundColor: colorPool[rd(0, colorPool.length - 1)],
     })
   }
-}
-
-function startTimer() {
-  return setInterval(() => {
-    moveBlock()
-  }, 2000)
 }
 
 function followCursor(e) {
@@ -240,6 +231,12 @@ function showtip(msg) {
   msgDiv.addEventListener('animationend', function () {
     this.remove()
   })
+}
+
+function startTimer() {
+  return setInterval(() => {
+    moveBlock()
+  }, 4000)
 }
 
 window.onload = () => {

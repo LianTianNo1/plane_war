@@ -7,7 +7,7 @@ const block_box = document.querySelector('.block_box')
 const rd = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 const totalPool = [
   ['#22181C', '#FF5B00', 'white'],
-  ['#00dffc', '#008c9e', '#005f6b', '#343838'],
+  // ['#00dffc', '#008c9e', '#005f6b', '#343838'],
   // ['#2C3E50', '#FC6621', '#EDF1F2', '#42B4E7'],
   // ['#F5E5FC', '#8AE1FC', '#C08497', '#48B8D0'],
 ]
@@ -21,16 +21,21 @@ function crateBlock(num = 40) {
   for (let i = 0; i < num; i++) {
     const mydiv = document.createElement('div')
     mydiv.className = 'blockdiv'
+    const wh = rd(5, 30)
     css(mydiv, {
       left: rd(-20, 100) + '%',
       top: rd(-20, 100) + '%',
       width: 10 + 'vw',
       height: 10 + 'vw',
-      borderRadius: '0',
       backgroundColor: colorPool[rd(0, colorPool.length - 1)],
-      transition: `all cubic-bezier(0.63, -0.05, 0.65, 2.25) 1s`,
-      boxShadow: '18px 20px 20px 6px rgb(0 0 0 / 30%)',
     })
+    mydiv.innerHTML = `
+    <figure class="front">H</figure>
+    <figure class="back">T</figure>
+    <figure class="right">M</figure>
+    <figure class="left">L</figure>
+    <figure class="top">5</figure>
+    <figure class="bottom">!</figure>`
     block_box.appendChild(mydiv)
   }
   setTimeout(() => {
@@ -39,27 +44,89 @@ function crateBlock(num = 40) {
 }
 // 移动位置
 const blocks = document.getElementsByClassName('blockdiv')
-let imgIndex = 0
+const figures = document.getElementsByTagName('figure')
+const fronts = document.getElementsByClassName('front')
+const backs = document.getElementsByClassName('back')
+const rights = document.getElementsByClassName('right')
+const lefts = document.getElementsByClassName('left')
+const tops = document.getElementsByClassName('top')
+const bottoms = document.getElementsByClassName('bottom')
+let mode = false
 function moveBlock() {
-  if (imgIndex > totalPool.length - 1) imgIndex = 0
-  let colorPool = totalPool[imgIndex]
-  imgIndex++
+  let colorPool = totalPool[rd(0, totalPool.length - 1)]
   for (let i = 0; i < blocks.length; i++) {
     css(blocks[i], {
-      left: rd(-10, 100) + '%',
-      top: rd(-10, 100) + '%',
-      width: rd(5, 10) + 'vw',
-      height: rd(5, 10) + 'vw',
-      transform: `scale(${rd(0.5, 3)}) `,
-      backgroundColor: colorPool[rd(0, colorPool.length - 1)],
+      left: rd(-20, 100) + '%',
+      top: rd(-20, 100) + '%',
+      transform: `translateZ(${rd(1, 10)}vw) rotate3d(1, 1, 1, ${rd(
+        0,
+        360
+      )}deg)  `,
+      transitionTimingFunction: `cubic-bezier(${Math.random()}, ${Math.random()}, ${Math.random()}, 1)`,
+      // backgroundColor: colorPool[rd(0, colorPool.length - 1)],
+      boxShadow: 'none',
     })
   }
-}
+  if (mode) {
+    ![...figures].forEach((item) =>
+      css(item, {
+        borderRadius: `4%`,
+        filter: 'none',
+      })
+    )
 
-function startTimer() {
-  return setInterval(() => {
-    moveBlock()
-  }, 2000)
+    ![...fronts].forEach(
+      (item) => (item.style.transform = `rotateY(0deg) translateZ(5vw)`)
+    )
+    ![...backs].forEach(
+      (item) => (item.style.transform = `rotateX(180deg) translateZ(5vw)`)
+    )
+    ![...rights].forEach(
+      (item) => (item.style.transform = `rotateY(90deg) translateZ(5vw)`)
+    )
+    ![...lefts].forEach(
+      (item) => (item.style.transform = `rotateY(-90deg) translateZ(5vw)`)
+    )
+    ![...tops].forEach(
+      (item) => (item.style.transform = `rotateX(90deg) translateZ(5vw)`)
+    )
+    ![...bottoms].forEach(
+      (item) => (item.style.transform = `rotateX(-90deg) translateZ(5vw)`)
+    )
+    mode = !mode
+  } else {
+    ![...figures].forEach((item) =>
+      css(item, {
+        // transform: `rotateY(${rd(0, 360)}deg) translateZ(5vw)`,
+        // transitionTimingFunction: `cubic-bezier(${Math.random()}, ${Math.random()}, ${Math.random()}, 1)`,
+        borderRadius: `71% 29% 70% 30% / 60% 0% 100% 40%`,
+        filter: 'drop-shadow(0 0 40px white)',
+      })
+    )
+    ![...fronts].forEach(
+      (item) => (item.style.transform = `rotateY(0deg) translateZ(6vw)`)
+    )
+    ![...backs].forEach(
+      (item) => (item.style.transform = `rotateY(60deg) translateZ(6vw)`)
+    )
+    ![...rights].forEach(
+      (item) => (item.style.transform = `rotateY(180deg) translateZ(6vw)`)
+    )
+    ![...lefts].forEach(
+      (item) => (item.style.transform = `rotateY(240deg) translateZ(6vw)`)
+    )
+    ![...tops].forEach(
+      (item) => (item.style.transform = `rotateY(300deg) translateZ(6vw)`)
+    )
+    ![...bottoms].forEach((item) => {
+      css(item, {
+        transform: `rotateX(90deg) translateZ(5vw)`,
+        borderRadius: '50%',
+      })
+    })
+
+    mode = !mode
+  }
 }
 
 function followCursor(e) {
@@ -242,8 +309,14 @@ function showtip(msg) {
   })
 }
 
+function startTimer() {
+  return setInterval(() => {
+    moveBlock()
+  }, 5000)
+}
+
 window.onload = () => {
   init()
-  crateBlock(60)
+  crateBlock(10)
   blockTiemr = startTimer()
 }

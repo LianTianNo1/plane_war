@@ -1,12 +1,117 @@
 const { log } = console
 let colorList
+const externalbox = document.querySelector('.external')
+let blockTiemr = null
+const box2 = document.querySelector('.box')
+const block_box = document.querySelector('.block_box')
+const rd = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
+const totalPool = [
+  ['#22181C', '#FF5B00', 'white'],
+  ['#00dffc', '#008c9e', '#005f6b', '#343838'],
+  // ['#2C3E50', '#FC6621', '#EDF1F2', '#42B4E7'],
+  // ['#F5E5FC', '#8AE1FC', '#C08497', '#48B8D0'],
+]
+let colorPool = totalPool[rd(0, totalPool.length - 1)]
+const css = (ele, json) => {
+  for (let key in json) ele.style[key] = json[key]
+}
+// 创建背景
+function crateBlock(num = 40) {
+  block_box.innerHTML = ''
+  for (let i = 0; i < num; i++) {
+    const mydiv = document.createElement('div')
+    mydiv.className = 'blockdiv'
+    const wh = rd(5, 30)
+    css(mydiv, {
+      left: rd(-20, 100) + '%',
+      top: rd(-20, 100) + '%',
+      width: 10 + 'vw',
+      height: 10 + 'vw',
+      backgroundColor: colorPool[rd(0, colorPool.length - 1)],
+    })
+    mydiv.innerHTML = `
+    <figure class="front">H</figure>
+    <figure class="back">T</figure>
+    <figure class="right">M</figure>
+    <figure class="left">L</figure>
+    <figure class="top">5</figure>
+    <figure class="bottom">!</figure>`
+    block_box.appendChild(mydiv)
+  }
+  setTimeout(() => {
+    moveBlock()
+  }, 100)
+}
+// 移动位置
+const blocks = document.getElementsByClassName('blockdiv')
+const figures = document.getElementsByTagName('figure')
+function moveBlock() {
+  let colorPool = totalPool[rd(0, totalPool.length - 1)]
+  const mode = rd(0, 1)
+  if (mode === 1) {
+    ![...figures].forEach((item) => (item.style.display = 'flex'))
+    for (let i = 0; i < blocks.length; i++) {
+      if (i > 14) blocks[i].style.display = 'none'
+      css(blocks[i], {
+        left: rd(-20, 100) + '%',
+        top: rd(-20, 100) + '%',
+        transform: `rotate3d(1, 1, 1, ${rd(0, 720)}deg) translateZ(${rd(
+          1,
+          40
+        )}vw) `,
+        transitionTimingFunction: `cubic-bezier(${Math.random()}, ${Math.random()}, ${Math.random()}, 1)`,
+        backgroundColor: colorPool[rd(0, colorPool.length - 1)],
+        boxShadow: 'none',
+      })
+    }
+  } else {
+    ![...figures].forEach((item) => (item.style.display = 'none'))
+    for (let i = 0; i < blocks.length; i++) {
+      blocks[i].style.display = 'block'
+      setTimeout(() => {
+        css(blocks[i], {
+          left: rd(-20, 100) + '%',
+          top: rd(-20, 100) + '%',
+          borderRadius: '0',
+          transform: ` translateZ(${rd(1, 40)}vw) `,
+          transitionTimingFunction: `cubic-bezier(${Math.random()}, ${Math.random()}, ${Math.random()}, 1)`,
+          backgroundColor: colorPool[rd(0, colorPool.length - 1)],
+          boxShadow: '18px 20px 20px 6px rgb(0 0 0 / 30%)',
+        })
+      }, 100)
+    }
+  }
+}
+
+function followCursor(e) {
+  if (new Date() - items.nowTime > 250) {
+    items.nowTime = new Date()
+    const x = e.clientX
+    const y = e.clientY
+
+    items.forEach((dot) => {
+      // 确定好点的位置
+      // log(x, dot.offsetLeft)
+      const nowpos = dot.getBoundingClientRect()
+      const diffx = x - (nowpos.left + dot.offsetWidth * 0.5)
+      const diffy = y - (nowpos.top + dot.offsetHeight * 0.5)
+
+      // 计算角度
+      const angle = (Math.atan2(diffy, diffx) * 180) / Math.PI
+      dot.style.transform = `rotate(${angle}deg)`
+    })
+  }
+}
 function init() {
   // 设置默认账号
+  let userInfo = window.localStorage.getItem('userInfo')
+  if (!userInfo || userInfo.length == 0) {
+    window.localStorage.setItem(
+      'userInfo',
+      JSON.stringify([{ username: 'html5kc', password: '123456' }])
+    )
+  }
 
-  window.localStorage.setItem(
-    'userInfo',
-    JSON.stringify([{ username: 'html5kc', password: '123456' }])
-  )
   // 颜色池
   colorList = [
     '#96ceb4',
@@ -30,6 +135,9 @@ function init() {
   const formboxs = document.querySelectorAll('.formbox')
   const sublogin = document.querySelector('.sublogin')
   const subregister = document.querySelector('.subregister')
+  const boxswrap = document.querySelector('.boxswrap')
+  const father_box = document.querySelector('.father_box')
+  const option = document.querySelector('.option')
   toRegister.addEventListener('click', function (e) {
     e.stopPropagation()
     e.defaultPrevented
@@ -50,7 +158,6 @@ function init() {
     formboxs[0].className = 'formbox form_show'
     formboxs[1].className = 'formbox'
     document.body.style.backgroundImage = `linear-gradient(145deg, #6599ff, #b9c2c8)`
-
     return
   })
   // 登录验证
@@ -74,7 +181,23 @@ function init() {
       if (flag) {
         showtip('登录成功')
         window.localStorage.setItem('username', name)
-        location.href = './start.html'
+        option.style.display = 'flex'
+        father_box.style.top = '-100vh'
+        document.body.onmousemove = followCursor
+        setTimeout(() => {
+          externalbox.style.display = 'none'
+          // canvas.style.display = 'none'
+          // bg_bubbles.style.display = 'none'
+          clearInterval(blockTiemr)
+          block_box.style.display = 'none'
+          box2.style.display = 'grid'
+        }, 1200)
+        const username = window.localStorage.getItem('username')
+        if (!username || username.length == 0) {
+          location.href = './login.html'
+        } else {
+          hellow_user.innerText = `您好：${username} !!!`
+        }
       } else {
         showtip('账号或密码错误')
       }
@@ -139,121 +262,15 @@ function showtip(msg) {
     this.remove()
   })
 }
-// 绘制星星
-function drawSatrt() {
-  const canvas = document.getElementById('canvas')
 
-  const ctx = canvas.getContext('2d')
-
-  // 获取当前视图的宽度和高度
-  let aw = document.documentElement.clientWidth || document.body.clientWidth
-  let ah = document.documentElement.clientHeight || document.body.clientHeight
-  // 赋值给canvas
-  canvas.width = aw
-  canvas.height = ah
-
-  // 屏幕变动时也要监听实时宽高
-  window.onresize = function () {
-    aw = document.documentElement.clientWidth || document.body.clientWidth
-    ah = document.documentElement.clientHeight || document.body.clientHeight
-    // 赋值给canvas
-    canvas.width = aw
-    canvas.height = ah
-  }
-
-  // 本游戏无论是实心，还是线条，色调都是白色
-  // ctx.fillStyle = 'white'
-  // ctx.strokeStyle = 'white'
-  ctx.fillStyle = 'white'
-  ctx.strokeStyle = 'white'
-
-  function Star(x, y, r) {
-    // x，y是坐标，r是半径
-    this.x = x
-    this.y = y
-    this.r = r
-    // speed参数，在  -3 ~ 3 之间取值
-    this.speedX = Math.random() * 3 * Math.pow(-1, Math.round(Math.random()))
-    this.speedY = Math.random() * 3 * Math.pow(-1, Math.round(Math.random()))
-  }
-
-  Star.prototype.draw = function () {
-    ctx.beginPath()
-    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2)
-    ctx.fill()
-    ctx.closePath()
-  }
-
-  Star.prototype.move = function () {
-    this.x -= this.speedX
-    this.y -= this.speedY
-    // 碰到边界时，反弹，只需要把speed取反就行
-    if (this.x < 0 || this.x > aw) this.speedX *= -1
-    if (this.y < 0 || this.y > ah) this.speedY *= -1
-  }
-
-  function drawLine(startX, startY, endX, endY) {
-    ctx.beginPath()
-    ctx.moveTo(startX, startY)
-    ctx.lineTo(endX, endY)
-    ctx.stroke()
-    ctx.closePath()
-  }
-
-  const stars = []
-  for (let i = 0; i < 100; i++) {
-    // 随机在canvas范围内找一个坐标画星星
-    stars.push(new Star(Math.random() * aw, Math.random() * ah, 3))
-  }
-
-  const mouseStar = new Star(0, 0, 3)
-
-  canvas.onmousemove = function (e) {
-    mouseStar.x = e.clientX
-    mouseStar.y = e.clientY
-  }
-  let newTime = 0
-  window.onclick = function (e) {
-    if (new Date() - newTime > 1000) {
-      newTime = new Date()
-      for (let i = 0; i < 5; i++) {
-        stars.push(new Star(e.clientX, e.clientY, 3))
-      }
-    }
-  }
-
-  // 星星的移动
-  setInterval(() => {
-    ctx.clearRect(0, 0, aw, ah)
-    // 鼠标星星渲染
-    mouseStar.draw()
-    // 遍历移动渲染
-    stars.forEach((star) => {
-      star.move()
-      star.draw()
-    })
-    stars.forEach((star, index) => {
-      // 类似于冒泡排序那样，去比较，确保所有星星两两之间都比较到
-      for (let i = index + 1; i < stars.length; i++) {
-        if (
-          Math.abs(star.x - stars[i].x) < 50 &&
-          Math.abs(star.y - stars[i].y) < 50
-        ) {
-          drawLine(star.x, star.y, stars[i].x, stars[i].y)
-        }
-      }
-
-      if (
-        Math.abs(mouseStar.x - star.x) < 50 &&
-        Math.abs(mouseStar.y - star.y) < 50
-      ) {
-        drawLine(mouseStar.x, mouseStar.y, star.x, star.y)
-      }
-    })
-  }, 50)
+function startTimer() {
+  return setInterval(() => {
+    moveBlock()
+  }, 8000)
 }
 
 window.onload = () => {
   init()
-  drawSatrt()
+  crateBlock(60)
+  blockTiemr = startTimer()
 }
